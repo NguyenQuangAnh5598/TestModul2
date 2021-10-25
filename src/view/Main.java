@@ -32,32 +32,29 @@ public class Main {
             System.out.println("Chọn chức năng");
             choice = scanner.nextInt();
             switch (choice) {
-                case 1 :
+                case 1:
                     printPhoneBookList();
                     break;
-                case 2 :
+                case 2:
                     addNewPhoneBook();
                     break;
-                case 3 :
+                case 3:
                     updatePhoneBookByPhoneNumber();
                     break;
-                case 4 :
+                case 4:
                     deletePhoneBookByPhoneNumber();
                     break;
-                case 5 :
+                case 5:
                     findPhoneBookByPhoneNumber();
                     break;
-                case 6 :
+                case 6:
                     readFile();
                     break;
-                case 7 :
+                case 7:
                     writeFile();
                     break;
             }
         } while (choice != 0);
-
-
-
 
 
     }
@@ -72,16 +69,20 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập số điện thoại bạn muốn tìm");
         String phoneNumber = scanner.nextLine();
-        for (int i = 0; i < phonebookList.size(); i++) {
-            if (phoneNumber.equals(phonebookList.get(i).getPhoneNumber())) {
-                System.out.println(phonebookList.get(i));
-            } else {
+        int count = 0;
+        while (count == 0) {
+            for (int i = 0; i < phonebookList.size(); i++) {
+                if (phoneNumber.equals(phonebookList.get(i).getPhoneNumber())) {
+                    System.out.println(phonebookList.get(i));
+                    count = 1;
+                    break;
+                }
                 System.out.println("Không có số liên lạc cần tìm, Nhập lại đi");
                 phoneNumber = scanner.nextLine();
             }
         }
-
     }
+
     public static void addNewPhoneBook() {
         Scanner scanner = new Scanner(System.in);
         Scanner scan = new Scanner(System.in);
@@ -108,17 +109,19 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập số điện thoại của người bạn muốn xóa danh bạ :");
         String phoneNumber = scanner.nextLine();
-        for (int i = 0; i < phonebookList.size(); i++) {
-            if (phoneNumber.equals(phonebookList.get(i).getPhoneNumber())) {
-                Phonebook deletedPhoneBook = phoneBookManager.deletePhoneBook(phoneNumber);
-                System.out.println("Đã xóa số liên lạc : " + deletedPhoneBook);
-                break;
-            } else {
-                System.out.println("Không có số liên lạc cần tìm, Nhập lại đi");
-                phoneNumber = scanner.nextLine();
+        int count = 0;
+        while (count == 0) {
+            for (int i = 0; i < phonebookList.size(); i++) {
+                if (phoneNumber.equals(phonebookList.get(i).getPhoneNumber())) {
+                    Phonebook deletedPhoneBook = phoneBookManager.deletePhoneBook(phoneNumber);
+                    System.out.println("Đã xóa số liên lạc : " + deletedPhoneBook);
+                    count = 1;
+                    break;
+                }
             }
+            System.out.println("Không có số liên lạc cần tìm, Nhập lại đi");
+            phoneNumber = scanner.nextLine();
         }
-
     }
 
     public static void updatePhoneBookByPhoneNumber() {
@@ -126,14 +129,19 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("Nhập số điện thoại của người mà bạn muốn sửa thông tin : ");
         String phoneNumber = scan.nextLine();
-        for (int i = 0; i < phonebookList.size(); i++) {
-            if (phoneNumber.equals(phonebookList.get(i).getPhoneNumber())) {
-                break;
-            } else {
-                System.out.println("Không có số liên lạc cần tìm, Nhập lại đi");
-                phoneNumber = scanner.nextLine();
+
+        int count = 0;
+        while (count == 0) {
+            for (int i = 0; i < phonebookList.size(); i++) {
+                if (phoneNumber.equals(phonebookList.get(i).getPhoneNumber())) {
+                    count = 1;
+                    break;
+                }
             }
+            System.out.println("Không có số liên lạc cần tìm, Nhập lại đi");
+            phoneNumber = scanner.nextLine();
         }
+
         System.out.println("Nhập tên nhóm mới : ");
         String newGroud = scanner.nextLine();
         System.out.println("Nhập tên mới :");
